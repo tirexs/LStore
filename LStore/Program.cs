@@ -1,4 +1,15 @@
+using LStore.Models.Entities;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+
+
+string connection = builder.Configuration.GetConnectionString("Context_PosgreSQL_Local");
+
+//connection = builder.Configuration.GetConnectionString("Context_PosgreSQL_NotLocal");
+
+builder.Services.AddDbContext<LStoreContext>(options => options.UseNpgsql(connection));
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
